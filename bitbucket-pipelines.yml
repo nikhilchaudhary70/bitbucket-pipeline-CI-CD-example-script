@@ -1,0 +1,13 @@
+image: php:7.4
+
+pipelines:
+  branches:
+    master:
+      - step:
+          name: Test Script
+          caches:
+            - composer
+          script:
+            - apt-get update && apt-get install -y unzip
+            - apt-get install -y openssh-client
+            - ssh -o StrictHostKeyChecking=no root@IP_ADDRESS 'bash -s' < execute.sh
