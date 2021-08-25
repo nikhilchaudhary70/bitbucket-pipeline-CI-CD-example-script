@@ -4,10 +4,19 @@ pipelines:
   branches:
     master:
       - step:
-          name: Test Script
+          name: Test Build Production
           caches:
             - composer
           script:
             - apt-get update && apt-get install -y unzip
             - apt-get install -y openssh-client
             - ssh -o StrictHostKeyChecking=no root@IP_ADDRESS 'bash -s' < execute.sh
+    development:
+      - step:
+          name: Test Build Development
+          caches:
+            - composer
+          script:
+            - apt-get update && apt-get install -y unzip
+            - apt-get install -y openssh-client
+            - ssh -o StrictHostKeyChecking=no root@IP_ADDRESS 'bash -s' < execute_development.sh
